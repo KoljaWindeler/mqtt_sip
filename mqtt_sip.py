@@ -76,7 +76,7 @@ def generate_tts(message, output_path):
 	], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 	os.remove(temp_mp3)
 
-def process_queue(process):
+def process_queue():
 	while not mqtt_message_queue.empty():
 		sip_number, message = mqtt_message_queue.get()
 		print(f"Processing call to {sip_number} with message: {message}")
@@ -176,7 +176,7 @@ def run_baresip_and_mqtt():
 
 	# Separate Schleife für BareSIP-Output
 	while True:
-		process_queue(process)
+		process_queue()
 		time.sleep(0.1)
 		
 
